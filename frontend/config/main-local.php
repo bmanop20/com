@@ -31,7 +31,14 @@ $config = [
             'displayTimezone' => 'Asia/Bangkok',
             'autoWidget' => true,
             'autoWidgetSettings' => [
-            Module::FORMAT_DATE => ['type'=>2, 'pluginOptions'=>['autoclose'=>true,'dateSettins'=>$dateThai]], // example
+            Module::FORMAT_DATE => [
+                                        'type'=>2, 
+                                        'pluginOptions'=>[
+                                                            'autoclose'=>true,
+                                                            'todayHighlight' => true,
+                                                            'dateSettins'=>$dateThai
+                                                        ]
+                                    ], // FORMAT_DATE
             Module::FORMAT_DATETIME => [], // setup if needed
             Module::FORMAT_TIME => [], // setup if needed
             ],
