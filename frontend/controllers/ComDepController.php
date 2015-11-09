@@ -9,7 +9,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
  * ComDepController implements the CRUD actions for ComDep model.
  */
@@ -41,6 +40,7 @@ class ComDepController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
 
     /**
      * Displays a single ComDep model.
@@ -49,6 +49,8 @@ class ComDepController extends Controller
      */
     public function actionView($id)
     {
+        $model = ComDep::find();
+        //print_r($model);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -64,7 +66,12 @@ class ComDepController extends Controller
         $model = new ComDep();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $searchModel = new ComDepSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            return $this->redirect(['index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]]);
         } else {
             return $this->render('create', [
                 'model' => $model,

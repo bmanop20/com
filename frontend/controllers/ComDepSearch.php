@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\ComDep;
+use yii\db\Query;
 
 /**
  * ComDepSearch represents the model behind the search form about `frontend\models\ComDep`.
@@ -19,7 +20,7 @@ class ComDepSearch extends ComDep
     {
         return [
             [['id', 'com_id', 'dep_id'], 'integer'],
-            [['datein', 'dateout'], 'safe'],
+            [['datein', 'dateout','code','name'], 'safe'],
         ];
     }
 
@@ -48,7 +49,7 @@ class ComDepSearch extends ComDep
         ]);
 
         $this->load($params);
-
+        //print_r($params);
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -61,6 +62,8 @@ class ComDepSearch extends ComDep
             'dep_id' => $this->dep_id,
             'datein' => $this->datein,
             'dateout' => $this->dateout,
+            'name' => $this->name,
+            
         ]);
 
         return $dataProvider;

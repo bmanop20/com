@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use frontend\models\Computer;
 use yii\helpers\ArrayHelper;
-use yii\db\Expression;
 use app\models\Department;
-use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
+use kartik\select2\Select2;
+
 /* @var $this yii\web\View */
 /* @var $model frontend\models\ComDep */
 /* @var $form yii\widgets\ActiveForm */
@@ -22,48 +22,32 @@ use kartik\datecontrol\DateControl;
 
             <?php 
 
-                //$form->field($model, 'com_id')->textInput() 
+               
                 $dataCategory = ArrayHelper::map(Computer::find()->select(['id','concat("COMID: ",id, " หมายเลข: " ,code) as name'])->asArray()->all(), 'id', 'name');
-                echo $form->field($model, 'com_id')->dropDownList($dataCategory,['prompt'=>'--------']);
+       
+                echo $form->field($model,'com_id')->widget(Select2::classname(),
+                        [
+                            'data'=>$dataCategory,
+                            'options'=>['placeholder'=>'----- อุปกรณ์คอมพิวเตอร์ -------']
+                            
+                        ]);
             ?>
 
             <?php 
-                //$form->field($model, 'dep_id')->textInput() 
+              
                 $dataCategory = ArrayHelper::map(Department::find()->asArray()->all(), 'id', 'name');
-                echo $form->field($model, 'dep_id')->dropDownList($dataCategory,['prompt'=>'--------']); 
+                
+                echo $form->field($model,'dep_id')->widget(Select2::classname(),
+                        [
+                            'data'=>$dataCategory,
+                            'options'=>['placeholder'=>'----- เลือกฝ่าย -------']
+                            
+                        ]);
             ?>
 
 
             <?php 
-                //echo $form->field($model, 'datein')->textInput() ;
-//               $form->field($model, 'datein')->widget(DateTimePicker::className(), [
-//                'language' => 'es',
-//                'size' => 'ms',
-//                'template' => '{input}',
-//                'pickButtonIcon' => 'glyphicon glyphicon-time',
-//                'inline' => true,
-//                'clientOptions' => [
-//                    'startView' => 1,
-//                    'minView' => 0,
-//                    'maxView' => 1,
-//                    'autoclose' => true,
-//                    'linkFormat' => 'HH:ii P', // if inline = true
-//                    // 'format' => 'HH:ii P', // if inline = false
-//                    'todayBtn' => true
-//                ]]);
-//                echo $form->field($model, 'datein')->widget(DateTimePicker::className(),[
-//                    //'model'=>$model,
-//                    'value'=>$model->datein,
-//                    'attribute'=>'datein',
-//                    'convertFormat' => true,
-//                    'pluginOptions' => [
-//                        'format' => 'dd-mm-yyyy',
-//                        //'startDate' => '01-Mar-2014 12:00 AM',
-//                        'todayHighlight' => true,
-//                        //'dateFormat'=>'php:Y-m-d',
-//                        ]
-//                    ]);  
-            //echo $model->datein;
+                
             echo $form->field($model,'datein')->widget(DateControl::classname(),
                     [
                         'type'=>DateControl::FORMAT_DATE,
@@ -75,6 +59,7 @@ use kartik\datecontrol\DateControl;
             ?>
 
             <?php 
+            
                 echo $form->field($model, 'dateout')->widget(DateControl::classname(),
                     [   
                         'value'=>'20-11-2015',

@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\ComDep */
-
+//print_r($model);
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Com Deps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

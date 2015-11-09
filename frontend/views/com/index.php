@@ -23,7 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'contentOptions'=>['class'=>'kartik-sheet-style'],
+                'width' => '36px',
+                'header'=> '',
+                'headerOptions'=>['class'=>'kartik-sheet-style']
+            ],
 
             'id',
             'com_type_id',
@@ -34,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'os',
             // 'arch_type_id',
             // 'brand',
-            // 'code',
+             'code',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

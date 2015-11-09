@@ -1,6 +1,6 @@
 <?php
 use kartik\datecontrol\Module;
-
+use kartik\grid\GridView;
 
 $dateThai = array(
                     'shortDays'=>['จ','อ','พ','พฤ','ศ','ส','อ'],
@@ -36,14 +36,24 @@ $config = [
                                         'pluginOptions'=>[
                                                             'autoclose'=>true,
                                                             'todayHighlight' => true,
-                                                            'dateSettins'=>$dateThai
+                                                            'dateSettins'=>$dateThai,
                                                         ]
                                     ], // FORMAT_DATE
             Module::FORMAT_DATETIME => [], // setup if needed
             Module::FORMAT_TIME => [], // setup if needed
             ],
-        ]
-    ]
+        ],
+        'gridview' =>  [
+        'class' => '\kartik\grid\Module',
+        // enter optional module parameters below - only if you need to  
+        // use your own export download action or custom translation 
+        // message source
+        'downloadAction' => 'gridview/export/download',
+
+        // 'i18n' => []
+        ],
+
+    ],
 ];
 
 if (!YII_ENV_TEST) {

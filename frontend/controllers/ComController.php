@@ -9,7 +9,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
  * ComController implements the CRUD actions for Computer model.
  */
@@ -41,6 +40,7 @@ class ComController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
 
     /**
      * Displays a single Computer model.
