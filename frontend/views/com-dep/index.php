@@ -7,6 +7,7 @@ use kartik\grid\GridView;
 use frontend\controllers\ComDepController;
 use frontend\models\Department;
 use yii\helpers\ArrayHelper;
+use frontend\models\Computer;
 $exportConfig = ([
             GridView::CSV => ['label' => 'Save as CSV'],
             //GridView::HTML => [// html settings],
@@ -60,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                    'class' => 'yii\grid\SerialColumn',
                    'contentOptions'=>['class'=>'kartik-sheet-style'],
                    //'width' => '36px',
+                   //'vAlign'=>'middle',
                    'header'=> '',
                    'headerOptions'=>['class'=>'kartik-sheet-style']
                ],
@@ -68,11 +70,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute'=>'com_id',
                     //'header' =>'แผนก',
+                    'width'=>'350px',
                     'value' => function($model){ return $model->getComCode($model->com_id); },
-                ],
+                    'filterType'=>GridView::FILTER_SELECT2,
+                    'filter'=>ArrayHelper::map(Computer::find()->orderBy('id')->asArray()->all(), 'id', 'code'),    
+                    'filterWidgetOptions'=>[
+                    'pluginOptions'=>['allowClear'=>true],
+                        ],
+                        'filterInputOptions'=>['placeholder'=>'หมายเลข'],
+                        'format'=>'raw'       
+                        ],        
+               
                 [
                     'attribute'=>'dep_id',
                     //'header' =>'แผนก',
+                    'width'=>'250px',
                     'value' => function($model){ return $model->getDepName($model->dep_id); },
                     'filterType'=>GridView::FILTER_SELECT2,
                     'filter'=>ArrayHelper::map(Department::find()->orderBy('id')->asArray()->all(), 'id', 'name'),    

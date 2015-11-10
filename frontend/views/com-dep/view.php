@@ -28,11 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'com_id',
-            'dep_id',
-            'datein',
-            'dateout',
+            //'id',
+            [
+                'attribute'=>'com_id',
+                'value'=>$model->getComCode($model->com_id),
+            ],
+            [
+                'attribute'=>'dep_id',
+                'value'=>$model->getDepName($model->dep_id),
+            ],
+//            'datein',
+//            'dateout',
         ],
     ]) ?>
 
