@@ -12,6 +12,10 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
     'components' => [
+        'getvalue' =>
+        [
+            'class'=>'app\components\GetValue',
+        ],
         'log' => [
             'targets' => [
                 [

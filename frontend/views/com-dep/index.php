@@ -9,9 +9,10 @@ use frontend\models\Department;
 use yii\helpers\ArrayHelper;
 use frontend\models\Computer;
 $exportConfig = ([
-            GridView::CSV => ['label' => 'Save as CSV'],
+            //GridView::CSV   => ['label' => 'Save as CSV'],
             //GridView::HTML => [// html settings],
-            GridView::PDF => ['label' => 'Save as PDF'],
+            //GridView::PDF   => ['label' => 'Save as PDF'],
+            GridView::EXCEL => ['label'=>'Save as Excel'],
             ]);
 
 /* @var $this yii\web\View */
@@ -62,8 +63,11 @@ $this->params['breadcrumbs'][] = $this->title;
                    'contentOptions'=>['class'=>'kartik-sheet-style'],
                    //'width' => '36px',
                    //'vAlign'=>'middle',
+                   //'hAlign'=>'center',
                    'header'=> '',
-                   'headerOptions'=>['class'=>'kartik-sheet-style']
+                   'headerOptions'=>['class'=>'kartik-sheet-style'],
+                   'options'=>['style'=>'width:40px'],
+                    
                ],
                  //'id',
                
@@ -71,6 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute'=>'com_id',
                     //'header' =>'แผนก',
                     'width'=>'350px',
+                    //'hAlign'=>'center',
                     'value' => function($model){ return $model->getComCode($model->com_id); },
                     'filterType'=>GridView::FILTER_SELECT2,
                     'filter'=>ArrayHelper::map(Computer::find()->orderBy('id')->asArray()->all(), 'id', 'code'),    
@@ -85,6 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute'=>'dep_id',
                     //'header' =>'แผนก',
                     'width'=>'250px',
+                    //'hAlign'=>'center',
                     'value' => function($model){ return $model->getDepName($model->dep_id); },
                     'filterType'=>GridView::FILTER_SELECT2,
                     'filter'=>ArrayHelper::map(Department::find()->orderBy('id')->asArray()->all(), 'id', 'name'),    
@@ -94,7 +100,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filterInputOptions'=>['placeholder'=>'แผนก'],
                         'format'=>'raw'       
                         ],
-                'datein',
+                //'datein',
+                [
+                    'class'=> 'kartik\grid\FormulaColumn',
+                    'attribute' => 'datein',
+                    'hAlign'=>'center',
+                    'mergeHeader'=>true,
+                    'width'=>'150px',
+                ],
                  [
 
                      'class' => '\kartik\grid\ActionColumn',

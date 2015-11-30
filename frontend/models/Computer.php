@@ -3,7 +3,7 @@
 namespace frontend\models;
 
 use Yii;
-
+use app\models\ComType;
 
 /**
  * This is the model class for table "computer".
@@ -60,5 +60,11 @@ class Computer extends \yii\db\ActiveRecord
             'brand' => 'ยี้ห้อ',
             'code' => 'หมายเลขครุภัณฑ์',
         ];
+    }
+    
+    public function getType($id){
+        $model = ComType::find()->where(['id'=>$id])->one();
+        return $model->name;
+       
     }
 }
